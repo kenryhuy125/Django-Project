@@ -7,7 +7,6 @@
 
     <form action="{%url 'learning_logs:new_topic' %}" method='post'>
     {% crsf_token %}
-
     {{ form.as_p }}
 
     <button name="submit">Add topic</button>
