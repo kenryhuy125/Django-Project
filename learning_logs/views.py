@@ -27,7 +27,7 @@ def topic(request,topic_id):
         raise Http404
 
 
-    entries= topic.entry_set.order_by('-date_dadded')
+    entries= topic.entry_set.order_by('-date_added')
 
     context = {'topic':topic, 'entries':entries}
 
@@ -41,7 +41,7 @@ def new_topic(request):
     if request.method != 'POST':
         form = TopicForm()
     else:
-        form = TopicForm(data=rquest.POST)
+        form = TopicForm(data=request.POST)
 
         if form.is_valid():
             new_topic = form.save(commit=False)
@@ -54,7 +54,7 @@ def new_topic(request):
     return render(request, 'learning_logs/new_topic.html', context)
 
 @login_required
-def new_entry(request, entry_id):
+def new_entry(request, topic_id):
     topic = Topic.objects.get(id=topic_id)
     
     if topic.owner != request.user:
@@ -63,7 +63,7 @@ def new_entry(request, entry_id):
     if request.method != 'POST':
         form = EntryForm()
     else:
-        form = EntryForm(data=rquest.POST)
+        form = EntryForm(data=request.POST)
 
         if form.is_valid():
             new_entry = form.save(commit=False)
@@ -71,7 +71,7 @@ def new_entry(request, entry_id):
             new_entry.save()
             form.save()
 
-            return redirect('learning_logs:topics',t_id=topic_id)
+            return redirect('learning_logs:topics',topic_id=topic_id)
 
     context = {'form':form, 'topic':topic}
 
@@ -92,7 +92,7 @@ def edit_entry(request, entry_id):
         
         if form.is_valid():
             form.save()
-            return redirect('learning_logs:topic',t_id=topic.id)
+            return redirect('learning_logs:topic',topic_id=topic.id)
 
     #create context(dictionaries) to pass it easier (pass multiple items at 1 time)
     context = {'entry':entry, 'topic':topic, 'form':form}

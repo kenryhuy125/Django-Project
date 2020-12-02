@@ -16,6 +16,6 @@ def register(request):
             return redirect('learning_logs:index')
 
     context = {'form':form}
-    return render(request, 'regisration/register.html', context)
+    return render(request, 'registration/register.html', context)
 
         

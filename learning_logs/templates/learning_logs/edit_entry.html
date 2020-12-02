@@ -3,12 +3,12 @@
 {% block content %}
 
 
-    <p><a href="{% url 'learning_logs:topic', topic.id %}">{{ topic }}</a></p>
+    <p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p>
 
     <p>Edit entry:</p>
 
-    <form action="{%url 'learning_logs:edit_topic' entry.id %}" method='post'>
-    {% crsf_token %}
+    <form action="{%url 'learning_logs:edit_entry' entry.id %}" method='post'>
+    {% csrf_token %}
     {{ form.as_p }}
 
     <button name="submit">Save changes</button>

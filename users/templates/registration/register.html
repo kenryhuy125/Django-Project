@@ -3,7 +3,7 @@
 {% block content %}
 
 <form action="{%url 'users:register' %}" method='post'>
-    {% crsf_token %}
+    {% csrf_token %}
 
     {{ form.as_p }}
 
@@ -12,5 +12,5 @@
 </form>
 
 
-
 {% endblock content %}
+
