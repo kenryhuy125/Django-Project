@@ -71,11 +71,11 @@ def new_entry(request, topic_id):
             new_entry.save()
             form.save()
 
-            return redirect('learning_logs:topics',topic_id=topic_id)
+            return redirect('learning_logs:topic', topic_id=topic_id)
 
     context = {'form':form, 'topic':topic}
 
-    return render(request, 'learning_logs/new_topic.html', context)
+    return render(request, 'learning_logs/new_entry.html', context)
 
 @login_required
 def edit_entry(request, entry_id):
@@ -92,7 +92,7 @@ def edit_entry(request, entry_id):
         
         if form.is_valid():
             form.save()
-            return redirect('learning_logs:topic',topic_id=topic.id)
+            return redirect('learning_logs:topic', topic_id=topic.id)
 
     #create context(dictionaries) to pass it easier (pass multiple items at 1 time)
     context = {'entry':entry, 'topic':topic, 'form':form}
